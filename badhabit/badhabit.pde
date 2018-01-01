@@ -2,9 +2,9 @@ MoveControl moveControl;
 Npc[] npc = new Npc[8];
 Building pharmacy;
 final int PHAR_INIT=0, PHAR_BUY=1, PHAR_PAY=2;
-int pharmacyState =0;
+int pharmacyState =PHAR_INIT;
 final int GAME_START=0, GAME_MAP=1, GAME_PHARMACY=2;
-int gameState = 1;
+int gameState = GAME_MAP;
 
 void setup(){
   size(800, 600, P2D);
@@ -97,6 +97,23 @@ void keyReleased(){
       case UP:
         upState = false;
         break;
+      
+    }
+  }else{
+    
+    if(gameState==GAME_PHARMACY){
+      if(pharmacyState>1){
+        if(key==' '){
+          gameState=GAME_MAP;
+          pharmacyState=PHAR_INIT;
+        }else if(key==ENTER){
+          
+        }
+      }else{
+        if(key==ENTER){
+          pharmacyState++;
+        }
+      }
     }
   }
 }
