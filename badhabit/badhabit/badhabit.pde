@@ -1,8 +1,8 @@
 PImage map;
 PImage doctor;
 
-float posX=0;
-float posY=0;
+float pX=80;
+float pY=0;
 
 boolean upState = false;
 boolean downState = false;
@@ -11,43 +11,32 @@ boolean rightState = false;
 
 void setup(){
   size(800, 600, P2D);
-  AssetLoader loader = new AssetLoader();
-  loader.loadAsset();
-  
+  map = loadImage("images/map_bg.png");
+  doctor = loadImage("images/doctor_front.png");
 }
 
 
 void draw(){
-  background(255);
   pushMatrix();
-  
-  
-  translate(max(-800, min(0, -posX)), max(-600, min(0, -posY)));
-  
+  translate(max(-pX, -1600), max(-pY,-800+doctor.height));
   image(map, 0 ,0);
   
   
-  image(doctor, posX+80, posY+250);
-  popMatrix();
-  
-  
-  
-  
   if(upState){
-
-    posY-=10;
+    pY-=10;
   }
   if(downState){
-    posY+=10;
+    pY+=10;
   }
   if(rightState){
-    posX+=10;
+    pX+=10;
   }
   if(leftState){
-    posX-=10;
+    if(pX>0) pX-=10;
   }
   
-  
+  image(doctor,pX,pY+201);
+  popMatrix();
 }
 
 
@@ -73,22 +62,21 @@ void keyPressed(){
   }
 }
 
-
 void keyReleased(){
   if(key==CODED){
     switch(keyCode){
       case LEFT:
-        leftState = false;
-        break;
+      leftState = false;
+      break;
       case RIGHT:
-        rightState = false;
-        break;
+      rightState = false;
+      break;
       case DOWN:
-        downState = false;
-        break;
+      downState = false;
+      break;
       case UP:
-        upState = false;
-        break;
+      upState = false;
+      break;
     }
   }
 }
