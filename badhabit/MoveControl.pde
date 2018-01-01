@@ -12,16 +12,19 @@ class MoveControl{
   
   void movePlayer(){
     
-    color cUp = colliderMap.get(int(posX+80), int(-10+posY+250+doctor.height));
+    //according to collider map
+    color cUp_l = colliderMap.get(int(posX+80), int(-30+posY+250+doctor.height));
+    color cUp_r = colliderMap.get(int(posX+80+40), int(-30+posY+250+doctor.height));
     color cDown = colliderMap.get(int(posX+80), int(10+posY+250+doctor.height));
     color cLeft = colliderMap.get(int(posX+80-10), int(posY+250+doctor.height));
     color cRight = colliderMap.get(int(posX+80+40+10), int(posY+250+doctor.height));
 
-
-    if(cUp < -10){
+    //if map pixel relative to posX/posY is black
+    //cancel move direction
+    if(cUp_l < -10 || cUp_r <-10){
       upState=false;
     }
-    if(cDown<-10 ){
+    if(cDown<-10 || posY+250+doctor.height> 1200){
       downState=false;
     }
     if(cLeft<-10  || posX+80<1){
