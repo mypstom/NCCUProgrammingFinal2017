@@ -1,18 +1,10 @@
-PImage map;
-PImage doctor;
-
-float posX=0;
-float posY=0;
-
-boolean upState = false;
-boolean downState = false;
-boolean leftState = false;
-boolean rightState = false;
+MoveControl moveControl;
 
 void setup(){
   size(800, 600, P2D);
   AssetLoader loader = new AssetLoader();
   loader.loadAsset();
+  moveControl = new MoveControl();
   
 }
 
@@ -24,28 +16,17 @@ void draw(){
   
   translate(max(-800, min(0, -posX)), max(-600, min(0, -posY)));
   
+  
+  
+  
   image(map, 0 ,0);
-  
-  
   image(doctor, posX+80, posY+250);
   popMatrix();
   
   
   
-  
-  if(upState){
+  moveControl.movePlayer();
 
-    posY-=10;
-  }
-  if(downState){
-    posY+=10;
-  }
-  if(rightState){
-    posX+=10;
-  }
-  if(leftState){
-    posX-=10;
-  }
   
   
 }
@@ -55,20 +36,21 @@ void keyPressed(){
   if(key==CODED){
     switch(keyCode){
       case LEFT:
+        leftState = true;
         
-      leftState = true;
-      break;
+        break;
       case RIGHT:
+        rightState = true;
         
-      rightState = true;
-      break;
+        break;
       case DOWN:
+        downState = true;
         
-      downState = true;
-      break;
+        break;
       case UP:
+        upState = true;
         
-      upState = true;
+        break;
     }
   }
 }
