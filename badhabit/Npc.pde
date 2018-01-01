@@ -1,26 +1,26 @@
 
 class Npc{
+  int id;
   float x;
   float y;
   PImage img;
   
   
-  Npc(float x, float y, PImage img){
+  Npc(float x, float y, PImage img, int id){
+    this.id = id;
     this.x = x;
     this.y = y;
     this.img = img;
-    
   }
   
   void update(){
     display();
-    
   }
   
   void display(){
       image(img, x, y);
       if(isCollider()){
-        image(spaceKey, x-spaceKey.height, y);  
+        image(spaceKey, x, y-spaceKey.height*1.3);  
       }
   }
   
@@ -30,10 +30,6 @@ class Npc{
     }else{
       return false;
     }
-  
-  }
-  
-  void showTriggerBtn(){
   
   }
 

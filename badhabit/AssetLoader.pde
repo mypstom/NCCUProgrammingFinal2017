@@ -1,6 +1,6 @@
 PImage map, colliderMap, pKey, spaceKey;
 PImage doctor, doctorDown, doctorUp, doctorLeft, doctorRight;
-PImage[] npcImg;
+PImage[] npcImg, pharmacyImg;
 int[][] npcPos = {
   //patient
   {650, 200},{1365, 395},{1128, 628},{388, 850},
@@ -14,6 +14,7 @@ class AssetLoader{
     sceneAsset();
     loadDoctorAsset();
     mapNPC();
+    pharmacyAsset();
   }
   
   void sceneAsset(){
@@ -36,7 +37,12 @@ class AssetLoader{
     for(int i=0; i<npcImg.length; i++){
       npcImg[i] = loadImage("images/npc/npc"+i+".png");
     }
-    
-    
+  }
+  
+  void pharmacyAsset(){
+    pharmacyImg = new PImage[3];
+    for(int i=0; i<pharmacyImg.length; i++){
+      pharmacyImg[i] = loadImage("images/pharmacy/phar"+(i+1)+".png");
+    }
   }
 }
