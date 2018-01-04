@@ -3,6 +3,8 @@ Npc[] npc = new Npc[8];
 
 Building pharmacy;
 final int PHAR_INIT=0, PHAR_BUY=1, PHAR_PAY=2;
+
+//for pharmacy
 int pharmacyState =PHAR_INIT;
 boolean isPharInfo =false;
 int money = 100;
@@ -14,16 +16,18 @@ int _zWater=0, _xWater=0, _cWater=0, _vWater=0;
 int currentDesc = -1;
 
 //for dialog
-int diaNpc=-1;
+int diaNpc=0;
 int currentDialog=0;
 int dogTimes=0;
 
 //in game
 int currentDescIndex=0;
+PressPad pressPad;
+
 
 final int GAME_START=0, GAME_NAME=1, GAME_MAP=2, GAME_KIT=3, GAME_DIALOG=4, GAME_PHARMACY=5, 
 GAME_INGAME=6, GAME_PLAYING=7;
-int gameState = GAME_NAME;
+int gameState = GAME_PLAYING;
 
 
 char[] name;
@@ -55,6 +59,10 @@ void setup(){
   nameAction = new NameAction();
   dialogAction = new Dialog();
   kitAction = new KitAction();
+  
+  pressPad = new PressPad();
+  
+  
   name = new char[MAX_NAME_COUNT];
   for(int i=0;i<name.length;i++){
     name[i] = ' ';
@@ -81,9 +89,27 @@ void draw(){
       break;
     case GAME_INGAME:
       image(npcDesc[diaNpc][currentDescIndex], 0, 0);
+      
       break;
     case GAME_PLAYING:
+    
       image(playingBg, 0, 0);
+      pressPad.display();
+      
+      
+      
+      
+      //water
+      fill(255);
+      textSize(35);
+      float startY = 310;
+      float startX = 710;
+      text(zWater, startX, startY);
+      text(xWater, startX, startY+20+50);
+      text(cWater, startX, startY+40+100);
+      text(vWater, startX, startY+60+150);
+      
+      
       break;
   }
 
@@ -108,6 +134,9 @@ void keyPressed(){
     case GAME_PHARMACY:
       pharmacyAction.keyPress(key);
       break;
+    case GAME_PLAYING:
+      pressPad.keyPress(keyCode, key);
+      break;
   }
 }
 
@@ -131,12 +160,16 @@ void keyReleased(){
       pharmacyAction.keyRelease(key);
       break;
     case GAME_INGAME:
+      
       if(currentDescIndex<npcDescCount[diaNpc]-1){
         currentDescIndex++;
       }else{
         gameState=GAME_PLAYING;
         currentDescIndex=0;
       }
+      break;
+    case GAME_PLAYING:
+      pressPad.keyRelease(keyCode, key);
       break;
   }
 }

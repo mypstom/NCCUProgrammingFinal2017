@@ -10,6 +10,9 @@ PImage kit;
 PImage[] kitDesc;
 PImage[][] dialogs;
 
+PImage[] pressPadInit;
+PImage[] pressPadPress;
+
 int[][] npcPos = {
   //patient
   {650, 200},{1365, 395},{1128, 628},{388, 850},
@@ -49,6 +52,13 @@ class AssetLoader{
   
   void gameMainAsset(){
     playingBg = loadImage("images/game/ingame/bg.png");
+    
+    pressPadInit = new PImage[4];
+    pressPadPress = new PImage[4];
+    for(int i=0; i<4;i++){
+      pressPadInit[i] = loadImage("images/game/ingame/pressPad_init_"+i+".png");
+      pressPadPress[i] = loadImage("images/game/ingame/pressPad_press_"+i+".png");
+    }
   }
   
   
