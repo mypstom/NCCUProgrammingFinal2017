@@ -13,8 +13,13 @@ int _zWater=0, _xWater=0, _cWater=0, _vWater=0;
 //for kit
 int currentDesc = -1;
 
+//for dialog
+int diaNpc=-1;
+int currentDialog=0;
+int dogTimes=0;
 
-final int GAME_START=0, GAME_NAME=1, GAME_MAP=2, GAME_KIT=3, GAME_PHARMACY=4;
+
+final int GAME_START=0, GAME_NAME=1, GAME_MAP=2, GAME_KIT=3, GAME_DIALOG=4, GAME_PHARMACY=5, GAME_INGAME=6;
 int gameState = GAME_NAME;
 
 
@@ -87,6 +92,12 @@ void draw(){
         image(kitDesc[currentDesc], 548, 42);
       }
       break;
+    case GAME_DIALOG:
+      if(diaNpc==5){
+        currentDialog = dogTimes;
+      }
+      image(dialogs[diaNpc][currentDialog], 0, 0);
+      break;
     case GAME_PHARMACY:
       image(pharmacyImg[pharmacyState], 0, 0);
       fill(#252C68);
@@ -154,6 +165,17 @@ void keyPressed(){
         _vWater=0;
       }else if(key=='k'){
         gameState = GAME_KIT;
+      }else if(key==' '){
+        
+        for(int i=0; i < npc.length; i++){
+          int colId = npc[i].isCollide();
+          if(colId!=-1){
+            diaNpc=colId;
+            currentDialog=0;
+            gameState = GAME_DIALOG;
+          }
+        }
+        
       }
       switch(keyCode){
         case LEFT:
@@ -183,6 +205,29 @@ void keyPressed(){
       }else if(key==' '){
         gameState = GAME_MAP;
         currentDesc=-1;
+      }
+      break;
+    case GAME_DIALOG:
+      //is old man
+      if(diaNpc==4){
+        if(key==' '){
+          if(currentDialog<3){
+            currentDialog++;
+          }else{
+            gameState=GAME_MAP;
+            currentDialog=0;
+          }
+        }
+      }else if(diaNpc==5 &&( key==ENTER || key==RETURN)){
+        //is dog
+        if(dogTimes<2){
+          dogTimes++;
+        }
+      }else{
+        if(key==' '){
+          gameState=GAME_MAP;
+          currentDialog=0;
+        }
       }
       break;
     case GAME_PHARMACY:
@@ -242,6 +287,15 @@ void keyReleased(){
       }
       break;
     case GAME_KIT:
+      break;
+    case GAME_DIALOG:
+      if(key==ENTER||key==RETURN){
+        if(diaNpc<4){
+          println("GO");
+          gameState = GAME_INGAME;
+        }
+      }
+      
       break;
     case GAME_PHARMACY:
       

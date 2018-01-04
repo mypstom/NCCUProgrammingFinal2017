@@ -8,6 +8,9 @@ PImage pharInfo, noMoney;
 PImage[] npcImg, pharmacyImg;
 PImage kit;
 PImage[] kitDesc;
+
+PImage[][] dialogs;
+
 int[][] npcPos = {
   //patient
   {650, 200},{1365, 395},{1128, 628},{388, 850},
@@ -22,9 +25,23 @@ class AssetLoader{
     mapAsset();
     doctorAsset();
     mapNPC();
+    mapNpcDialog();
     kitAsset();
     pharmacyAsset();
+    gameDescAsset();
+    gameMainAsset();
   }
+  
+  
+  void gameDescAsset(){
+  
+  }
+  
+  void gameMainAsset(){
+  
+  }
+  
+  
   
   void nameAsset(){
     nameBg1 = loadImage("images/start/name_bg.png");
@@ -67,6 +84,25 @@ class AssetLoader{
     for(int i=0; i<npcImg.length; i++){
       npcImg[i] = loadImage("images/npc/npc"+i+".png");
     }
+  }
+  
+  void mapNpcDialog(){
+    dialogs = new PImage[8][4];
+    //load one pic
+    for(int i=0; i<8;i++){
+        if(i==4 || i==5) continue;
+        String _filePath = "images/npc/dialog/dia_"+i+"_0.png";
+        dialogs[i][0] = loadImage(_filePath);
+    }
+    //load dog and oldman
+    for(int i=4; i<6;i++){
+      for(int j=0; j<4;j++){
+        if(i==5 && j==3) break;
+        String _filePath = "images/npc/dialog/dia_"+i+"_"+j+".png";
+        dialogs[i][j] = loadImage(_filePath);
+      }
+    }
+    
   }
   
   void pharmacyAsset(){

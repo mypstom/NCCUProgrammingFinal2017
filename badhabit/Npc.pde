@@ -11,6 +11,7 @@ class Npc{
     this.x = x;
     this.y = y;
     this.img = img;
+    
   }
   
   void update(){
@@ -19,16 +20,16 @@ class Npc{
   
   void display(){
       image(img, x, y);
-      if(isCollider()){
+      if(isCollide()!=-1){
         image(spaceKey, x, y-spaceKey.height*1.3);  
       }
   }
   
-  boolean isCollider(){
+  int isCollide(){
     if(dist(posX+80+doctor.width/2, posY+250+doctor.height/2, x+img.width/2, y+img.height/2) <100){
-      return true;
+      return id;
     }else{
-      return false;
+      return -1;
     }
   
   }

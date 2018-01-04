@@ -9,7 +9,7 @@ class Building extends Npc{
   }
   
   void display(){
-    if(isCollider()){
+    if(isCollide()!=-1){
       image(pKey, x, y-spaceKey.height*1.3);
       if(key=='p'){
         gameState=2;
