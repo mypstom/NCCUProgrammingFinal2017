@@ -8,7 +8,6 @@ PImage pharInfo, noMoney;
 PImage[] npcImg, pharmacyImg;
 PImage kit;
 PImage[] kitDesc;
-
 PImage[][] dialogs;
 
 int[][] npcPos = {
@@ -17,6 +16,11 @@ int[][] npcPos = {
   //oldman dog pass1 pass2
   {232, 230}, {855, 905}, {185, 965}, {1360, 935}
 };
+
+PImage[][] npcDesc;
+int[] npcDescCount = {4, 6, 4, 6};
+
+PImage playingBg;
 
 class AssetLoader{
   
@@ -34,11 +38,17 @@ class AssetLoader{
   
   
   void gameDescAsset(){
-  
+    npcDesc = new PImage[4][max(npcDescCount)];
+    for(int i=0; i<4; i++){
+      for(int j=0; j<npcDescCount[i]; j++){
+        npcDesc[i][j] = loadImage("images/game/desc/des_"+i+"_"+j+".png");
+      }
+    }
+    
   }
   
   void gameMainAsset(){
-  
+    playingBg = loadImage("images/game/ingame/bg.png");
   }
   
   
