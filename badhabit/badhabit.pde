@@ -94,6 +94,7 @@ void draw(){
       mapAction.display();
       break;
     case GAME_KIT:
+      kitAction.display();
       break;
     case GAME_DIALOG:
       dialogAction.display();

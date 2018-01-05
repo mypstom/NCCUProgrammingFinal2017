@@ -20,7 +20,7 @@ class Util{
     }else if(where==2){
       for(int i=0;i<name.length;i++){
         if(name[i]!=' '){
-          image(nameWords[findWords(name[i])], posX+ i*30+50, posY+200);
+          image(nameWords[findWords(name[i])], posX+ i*30+50, posY+200+250);
         }
       }
     }else if(where==3){

@@ -5,7 +5,6 @@ class KitAction{
   }
   
   void display(){
-    kitAction.display();
     image(kit, 0, 0);
     util.showName(3);
     fill(255);
