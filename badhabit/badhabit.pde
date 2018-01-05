@@ -24,10 +24,16 @@ int dogTimes=0;
 int currentDescIndex=0;
 PressPad pressPad;
 
+Minim minim;
+AudioPlayer song;
+BeatDetect beat;
+
+
+
 
 final int GAME_START=0, GAME_NAME=1, GAME_MAP=2, GAME_KIT=3, GAME_DIALOG=4, GAME_PHARMACY=5, 
 GAME_INGAME=6, GAME_PLAYING=7;
-int gameState = GAME_PLAYING;
+int gameState = GAME_NAME;
 
 
 char[] name;
@@ -42,6 +48,7 @@ Util util;
 NameAction nameAction;
 Dialog dialogAction;
 KitAction kitAction;
+BeatMaster beatMaster;
 
 void setup(){
   size(800, 600, P2D);
@@ -63,10 +70,17 @@ void setup(){
   pressPad = new PressPad();
   
   
+  minim = new Minim(this);
+  song = minim.loadFile("music1.mp3", 2048);
+  beatMaster = new BeatMaster();
+  
   name = new char[MAX_NAME_COUNT];
   for(int i=0;i<name.length;i++){
     name[i] = ' ';
   }
+  
+  
+  
 }
 
 void draw(){
@@ -94,8 +108,9 @@ void draw(){
     case GAME_PLAYING:
     
       image(playingBg, 0, 0);
-      pressPad.display();
       
+      beatMaster.display();
+      pressPad.display();
       
       
       
@@ -165,10 +180,14 @@ void keyReleased(){
         currentDescIndex++;
       }else{
         gameState=GAME_PLAYING;
+        beatMaster.start();
         currentDescIndex=0;
       }
       break;
     case GAME_PLAYING:
+      if(key==' '){
+        beatMaster.doAttack();
+      }
       pressPad.keyRelease(keyCode, key);
       break;
   }

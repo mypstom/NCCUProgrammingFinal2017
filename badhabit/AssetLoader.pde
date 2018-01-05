@@ -12,6 +12,7 @@ PImage[][] dialogs;
 
 PImage[] pressPadInit;
 PImage[] pressPadPress;
+PImage[] atkItems;
 
 int[][] npcPos = {
   //patient
@@ -55,10 +56,15 @@ class AssetLoader{
     
     pressPadInit = new PImage[4];
     pressPadPress = new PImage[4];
+    atkItems = new PImage[4];
     for(int i=0; i<4;i++){
       pressPadInit[i] = loadImage("images/game/ingame/pressPad_init_"+i+".png");
       pressPadPress[i] = loadImage("images/game/ingame/pressPad_press_"+i+".png");
+      atkItems[i] = loadImage("images/game/ingame/atk_"+i+".png");
     }
+    
+    
+    
   }
   
   
