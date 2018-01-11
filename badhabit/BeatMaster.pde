@@ -1,6 +1,8 @@
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 
+boolean isHealthyFace = false;
+int healthFrame = 0;
 
 
 
@@ -18,7 +20,7 @@ class BeatMaster{
   }
   
   void start(){
-    song.play();
+    song[diaNpc].play();
   }
   
   void doAttack(){
@@ -29,15 +31,36 @@ class BeatMaster{
   
   void display(){
     
+    
+    
+    for(int i=0; i< attackItems.size(); i++){
+      attackItems.get(i).display();
+      if(attackItems.get(i).isCollidePad()){
+        isHealthyFace =true;
+        
+        attackItems.remove(i);
+      }
+    }
+    
+    healthFrame++;
+    if(healthFrame>30){
+      isHealthyFace =false;
+      healthFrame=0;
+    }
+    
+        
+  }
+  
+  
+  void drawEffect(){
     float a = map(eRadius, 20, 80, 60, 255);
-    //fill(255, 212, 128, a);
+    fill(255, 212, 128, a);
     noFill();
-    beat.detect(song.mix);
+    beat.detect(song[diaNpc].mix);
     if ( beat.isOnset() ){
       if(coldDown>=60){
         doAttack();
         coldDown=0;
-        println("GO!");
       }
       eRadius = 350;
     }
@@ -48,11 +71,6 @@ class BeatMaster{
     eRadius *= 0.85;
     //if ( eRadius < 20 ) eRadius = 0;
     coldDown++;
-    if(attackItems.size()>0){
-      for(AttackItem atk : attackItems){
-        atk.display();
-      }
-    }
   }
 
 

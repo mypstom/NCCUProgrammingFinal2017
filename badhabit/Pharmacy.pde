@@ -55,10 +55,10 @@ class Pharmacy{
         case PHAR_BUY:
           if(_key==ENTER){
             if(_money<=money){
-              zWater=_zWater;
-              xWater=_xWater;
-              cWater=_cWater;
-              vWater=_vWater;
+              zWater+=_zWater;
+              xWater+=_xWater;
+              cWater+=_cWater;
+              vWater+=_vWater;
               money=money-_money;
               pharmacyState++;
               isPharInfo = false;

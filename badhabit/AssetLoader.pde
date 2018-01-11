@@ -1,3 +1,6 @@
+import processing.video.*;
+Movie startVideo;
+
 PImage map, colliderMap, pKey, spaceKey;
 PImage nameBg1, nameBg2;
 PImage[] nameWords;
@@ -13,6 +16,8 @@ PImage[][] dialogs;
 PImage[] pressPadInit;
 PImage[] pressPadPress;
 PImage[] atkItems;
+PImage[] npcFace;
+PImage[] npcFaceHappy;
 
 int[][] npcPos = {
   //patient
@@ -26,9 +31,12 @@ int[] npcDescCount = {4, 6, 4, 6};
 
 PImage playingBg;
 
+PImage startBg;
+
 class AssetLoader{
   
   void loadAsset(){
+    startAsset();
     nameAsset();
     mapAsset();
     doctorAsset();
@@ -40,6 +48,9 @@ class AssetLoader{
     gameMainAsset();
   }
   
+  void startAsset(){
+    startBg = loadImage("images/startGame/start.png");
+  }
   
   void gameDescAsset(){
     npcDesc = new PImage[4][max(npcDescCount)];
@@ -57,14 +68,16 @@ class AssetLoader{
     pressPadInit = new PImage[4];
     pressPadPress = new PImage[4];
     atkItems = new PImage[4];
+    npcFace = new PImage[4];
+    npcFaceHappy = new PImage[4];
     for(int i=0; i<4;i++){
       pressPadInit[i] = loadImage("images/game/ingame/pressPad_init_"+i+".png");
       pressPadPress[i] = loadImage("images/game/ingame/pressPad_press_"+i+".png");
       atkItems[i] = loadImage("images/game/ingame/atk_"+i+".png");
+      npcFace[i] = loadImage("images/game/ingame/gameFace"+(i+1)+"_cry.png");
+      npcFaceHappy[i] = loadImage("images/game/ingame/gameFace"+(i+1)+"_smile.png");
+      
     }
-    
-    
-    
   }
   
   

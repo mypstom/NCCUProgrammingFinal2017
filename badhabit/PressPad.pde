@@ -20,6 +20,13 @@ class PressPad{
         image(pressPadPress[i], padPos[i][0], padPos[i][1]);
       }
     }
+    imageMode(CENTER);
+    if(isHealthyFace){
+      image(npcFaceHappy[diaNpc], width/2-92, height/2);
+    }else{
+      image(npcFace[diaNpc], width/2-92, height/2);
+    }
+    imageMode(CORNER);
   }
   
   void keyPress(int _keyCode, int _key){

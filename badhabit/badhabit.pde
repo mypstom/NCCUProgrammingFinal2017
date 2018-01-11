@@ -1,3 +1,4 @@
+
 MoveControl moveControl;
 Npc[] npc = new Npc[8];
 
@@ -25,15 +26,14 @@ int currentDescIndex=0;
 PressPad pressPad;
 
 Minim minim;
-AudioPlayer song;
+AudioPlayer[] song;
 BeatDetect beat;
-
 
 
 
 final int GAME_START=0, GAME_NAME=1, GAME_MAP=2, GAME_KIT=3, GAME_DIALOG=4, GAME_PHARMACY=5, 
 GAME_INGAME=6, GAME_PLAYING=7;
-int gameState = GAME_NAME;
+int gameState = GAME_START;
 
 
 char[] name;
@@ -51,9 +51,15 @@ KitAction kitAction;
 BeatMaster beatMaster;
 
 void setup(){
+  frameRate(60);
   size(800, 600, P2D);
-  AssetLoader loader = new AssetLoader();
+  
+  AssetLoader loader = new AssetLoader(); 
   loader.loadAsset();
+ 
+  startVideo = new Movie(this, "startMG.MP4");
+  startVideo.play();
+  
   moveControl = new MoveControl();
   util = new Util();
   for(int i=0; i<npc.length; i++){
@@ -70,8 +76,13 @@ void setup(){
   pressPad = new PressPad();
   
   
+  song = new AudioPlayer[4];
+  
   minim = new Minim(this);
-  song = minim.loadFile("music1.mp3", 2048);
+  for(int i=0; i<4; i++){
+    song[i] = minim.loadFile("sound/game"+(i+1)+".mp3", 2048);
+  }
+  
   beatMaster = new BeatMaster();
   
   name = new char[MAX_NAME_COUNT];
@@ -83,9 +94,23 @@ void setup(){
   
 }
 
+
+
+
 void draw(){
+  background(0);
   switch(gameState){
     case GAME_START:
+      image(startBg, 0, 0);
+      float md = startVideo.duration();
+      float mt = startVideo.time();
+      if(mt<=md || mt==0){
+        image(startVideo, 0, 0);
+        
+      }else{
+        startVideo.stop();
+      }
+      
       break;
     case GAME_NAME:
       nameAction.display();
@@ -109,9 +134,10 @@ void draw(){
     case GAME_PLAYING:
     
       image(playingBg, 0, 0);
-      
-      beatMaster.display();
+      beatMaster.drawEffect();
       pressPad.display();
+      beatMaster.display();
+      
       
       
       
@@ -137,6 +163,7 @@ void draw(){
 void keyPressed(){
   switch(gameState){
     case GAME_START:
+
       break; 
     case GAME_MAP:
       mapAction.keyPress(keyCode, key);
@@ -160,6 +187,10 @@ void keyPressed(){
 void keyReleased(){
   switch(gameState){
     case GAME_START:
+      if(keyCode==ENTER || keyCode==RETURN){
+        gameState = GAME_NAME;
+        startVideo.stop();
+      }
       break;
     case GAME_NAME:
       nameAction.keyRelease(keyCode, key);      
@@ -192,4 +223,8 @@ void keyReleased(){
       pressPad.keyRelease(keyCode, key);
       break;
   }
+}
+
+void movieEvent(Movie m) {
+  m.read();
 }
