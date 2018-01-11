@@ -137,6 +137,7 @@ void draw(){
       beatMaster.drawEffect();
       pressPad.display();
       beatMaster.display();
+      pressPad.displayFace();
       
       
       
@@ -207,19 +208,24 @@ void keyReleased(){
       pharmacyAction.keyRelease(key);
       break;
     case GAME_INGAME:
-      
-      if(currentDescIndex<npcDescCount[diaNpc]-1){
-        currentDescIndex++;
-      }else{
-        gameState=GAME_PLAYING;
-        beatMaster.start();
-        currentDescIndex=0;
+      if( key==ENTER || key==RETURN){
+        if(currentDescIndex<npcDescCount[diaNpc]-1){
+          currentDescIndex++;
+        }else{
+          gameState=GAME_PLAYING;
+          beatMaster.start();
+          currentDescIndex=0;
+        }
+      }else if(key==DELETE||key==BACKSPACE){
+        if(currentDescIndex>0){
+          currentDescIndex--;
+        }else{
+          currentDescIndex=0;
+          gameState=GAME_MAP;
+        }
       }
       break;
     case GAME_PLAYING:
-      if(key==' '){
-        beatMaster.doAttack();
-      }
       pressPad.keyRelease(keyCode, key);
       break;
   }

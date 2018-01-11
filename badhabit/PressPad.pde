@@ -1,5 +1,6 @@
 
 boolean[] padPressState = {false, false, false, false};
+boolean padPressSpaceState = false;
 int[][] padPos = {{238, 186},{357, 227},{235, 348},{194, 227}};
 
 
@@ -20,6 +21,12 @@ class PressPad{
         image(pressPadPress[i], padPos[i][0], padPos[i][1]);
       }
     }
+    
+  }
+  
+  
+  void displayFace(){
+  
     imageMode(CENTER);
     if(isHealthyFace){
       image(npcFaceHappy[diaNpc], width/2-92, height/2);
@@ -28,6 +35,7 @@ class PressPad{
     }
     imageMode(CORNER);
   }
+  
   
   void keyPress(int _keyCode, int _key){
     switch(_keyCode){
@@ -42,6 +50,9 @@ class PressPad{
         break;
       case UP:
         padPressState[0]= true;
+        break;
+      case ' ':
+        padPressSpaceState = true;
         break;
     }
     
@@ -60,7 +71,9 @@ class PressPad{
       case UP:
         padPressState[0] = false;
         break;
-      
+      case ' ':
+        padPressSpaceState = false;
+        break;
     }
   }
 

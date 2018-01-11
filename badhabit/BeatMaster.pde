@@ -4,7 +4,20 @@ import ddf.minim.analysis.*;
 boolean isHealthyFace = false;
 int healthFrame = 0;
 
+int MAX_TIME = 60;
+int timeFrame = MAX_TIME*60;//frames
 
+int gamePoint =0;
+
+int delayCounter = 0;
+
+//int[] BPM = 105;
+float[] BPM = {52.5, 52.5, 52.5, 52.5};
+int bpmCounter = 0;
+int tempoFrames;
+
+boolean[] gameOppoState = {false, true, false, true};
+int[] gameSpaceItemState = {3, 1, 3, 3};
 
 class BeatMaster{
   ArrayList <AttackItem> attackItems;
@@ -20,26 +33,64 @@ class BeatMaster{
   }
   
   void start(){
-    song[diaNpc].play();
+    tempoFrames = floor(60*60/BPM[diaNpc]);
+    println(diaNpc);
   }
   
   void doAttack(){
-
-    attackItems.add( new AttackItem(floor(random(0,4))));
+    int ranSide = floor(random(0,4));
+    int ranType;
+    if(gameOppoState[diaNpc]){
+      ranType = floor(random(0, 3));
+    }else{
+      ranType = floor(random(0, 2));
+    }
+    
+    println(ranType);
+    int ranSpace = floor(random(0,gameSpaceItemState[diaNpc]));
+    attackItems.add( new AttackItem(ranSide, ranType, ranSpace));
 
   }
   
   void display(){
-    
-    
+    if(!song[diaNpc].isPlaying ()|| delayCounter<130){
+      delayCounter++;
+      if(delayCounter>180){
+        song[diaNpc].loop();
+      }
+    }else{
+      if(bpmCounter == tempoFrames){
+        doAttack();
+        bpmCounter=0;
+      }
+      bpmCounter++;
+    }
     
     for(int i=0; i< attackItems.size(); i++){
       attackItems.get(i).display();
-      if(attackItems.get(i).isCollidePad()){
-        isHealthyFace =true;
+      if(attackItems.get(i).isTooFar()){
+        attackItems.remove(i);
+      }else if(attackItems.get(i).isCollidePad()){
+        //hit item
+        eRadius = 250;
         
+        isHealthyFace =true;
+        gamePoint++;
         attackItems.remove(i);
       }
+    }
+    
+    //time counter
+    fill(#f5c7f7);
+    textSize(50);
+    text(nf(floor(timeFrame/60), 2), 698, 85);
+    timeFrame--;
+    
+    if(timeFrame<=0){
+      song[diaNpc].pause();
+      timeFrame = MAX_TIME*60;
+      gamePoint =0;
+      gameState = GAME_MAP;
     }
     
     healthFrame++;
@@ -48,6 +99,11 @@ class BeatMaster{
       healthFrame=0;
     }
     
+    //life bar
+    stroke(#74275C);
+    strokeWeight(25);
+    line(642.5, height-45, 642.5, height-45-min(560,gamePoint*10));
+    
         
   }
   
@@ -55,23 +111,18 @@ class BeatMaster{
   void drawEffect(){
     float a = map(eRadius, 20, 80, 60, 255);
     fill(255, 212, 128, a);
-    noFill();
+    //noFill();
     beat.detect(song[diaNpc].mix);
     if ( beat.isOnset() ){
-      if(coldDown>=60){
-        doAttack();
-        coldDown=0;
-      }
-      eRadius = 350;
+
     }
     
     stroke(#FFD480);
     strokeWeight(4);
     ellipse(310, 300, eRadius, eRadius);
     eRadius *= 0.85;
-    //if ( eRadius < 20 ) eRadius = 0;
-    coldDown++;
   }
-
+  
+  
 
 }

@@ -37,7 +37,6 @@ class Dialog{
 
     if(_key==ENTER||_key==RETURN){
       if(diaNpc<4){
-        println("GO");
         gameState = GAME_INGAME;
       }
     }

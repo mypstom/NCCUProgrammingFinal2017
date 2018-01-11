@@ -16,6 +16,9 @@ PImage[][] dialogs;
 PImage[] pressPadInit;
 PImage[] pressPadPress;
 PImage[] atkItems;
+PImage[] atkItemsOpposite;
+PImage[][] atkItemsSpace;
+
 PImage[] npcFace;
 PImage[] npcFaceHappy;
 
@@ -68,15 +71,21 @@ class AssetLoader{
     pressPadInit = new PImage[4];
     pressPadPress = new PImage[4];
     atkItems = new PImage[4];
+    atkItemsOpposite = new PImage[4];
+    atkItemsSpace = new PImage[4][3];
+    
     npcFace = new PImage[4];
     npcFaceHappy = new PImage[4];
     for(int i=0; i<4;i++){
       pressPadInit[i] = loadImage("images/game/ingame/pressPad_init_"+i+".png");
       pressPadPress[i] = loadImage("images/game/ingame/pressPad_press_"+i+".png");
       atkItems[i] = loadImage("images/game/ingame/atk_"+i+".png");
+      atkItemsOpposite[i] = loadImage("images/game/ingame/opposite_"+i+".png");
       npcFace[i] = loadImage("images/game/ingame/gameFace"+(i+1)+"_cry.png");
       npcFaceHappy[i] = loadImage("images/game/ingame/gameFace"+(i+1)+"_smile.png");
-      
+      for(int j=0; j< gameSpaceItemState[i];j++){
+        atkItemsSpace[i][j] = loadImage("images/game/ingame/space"+i+"_"+j+".png");
+      }
     }
   }
   
