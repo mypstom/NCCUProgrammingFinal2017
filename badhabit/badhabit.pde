@@ -30,10 +30,8 @@ Minim minim;
 AudioPlayer[] song;
 BeatDetect beat;
 
-
-
 final int GAME_START=0, GAME_NAME=1, GAME_MAP=2, GAME_KIT=3, GAME_DIALOG=4, GAME_PHARMACY=5, 
-GAME_INGAME=6, GAME_PLAYING=7;
+GAME_INGAME=6, GAME_PLAYING=7, GAME_RESULT=8;
 int gameState = GAME_START;
 
 
@@ -51,8 +49,11 @@ Dialog dialogAction;
 KitAction kitAction;
 BeatMaster beatMaster;
 
+//how many people do you help
+boolean[] healthyState = {false, false, false, false};
+
 void setup(){
-  frameRate(60);
+  frameRate(30);
   size(800, 600, P2D);
   
   AssetLoader loader = new AssetLoader(); 
@@ -155,6 +156,13 @@ void draw(){
       
       
       break;
+    case GAME_RESULT:
+      if(isGameWin){
+        image(resultWin[diaNpc], 0, 0);
+      }else{
+        image(resultLose[diaNpc], 0, 0);
+      }
+      break;
   }
 
 }
@@ -228,6 +236,13 @@ void keyReleased(){
       break;
     case GAME_PLAYING:
       pressPad.keyRelease(keyCode, key);
+      break;
+    case GAME_RESULT:
+      if(key==' '){
+        gameState=GAME_MAP;
+      }else{
+        gameState=GAME_INGAME;
+      }
       break;
   }
 }

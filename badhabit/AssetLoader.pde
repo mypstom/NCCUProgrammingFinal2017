@@ -8,7 +8,7 @@ PImage[] nameWordsDark;
 char[] words = {'a', 'd', 'e', 'f', 'g', 'h', 'q', 'r', 's', 't', 'w', 'y'};
 PImage doctor, doctorDown, doctorUp, doctorLeft, doctorRight;
 PImage pharInfo, noMoney;
-PImage[] npcImg, pharmacyImg;
+PImage[] npcImg, healthyNpc, pharmacyImg;
 PImage kit;
 PImage[] kitDesc;
 PImage[][] dialogs;
@@ -36,6 +36,9 @@ PImage[][] ironyMonster;
 PImage[][] ironyMonsterDia;
 PImage damageImg;
 
+PImage[] resultWin;
+PImage[] resultLose;
+
 PImage playingBg;
 
 PImage startBg;
@@ -53,6 +56,7 @@ class AssetLoader{
     pharmacyAsset();
     gameDescAsset();
     gameMainAsset();
+    gameResult();
   }
   
   void startAsset(){
@@ -100,6 +104,14 @@ class AssetLoader{
     }
   }
   
+  void gameResult(){
+    resultWin = new PImage[4];
+    resultLose = new PImage[4];
+    for(int i=0; i<4; i++){
+      resultWin[i] = loadImage("images/game/result/winGame"+(i+1)+".png");
+      resultLose[i] = loadImage("images/game/result/loseGame"+(i+1)+".png");
+    }
+  }
   
   
   void nameAsset(){
@@ -139,9 +151,13 @@ class AssetLoader{
   }
   
   void mapNPC(){
+    healthyNpc = new PImage[4];
     npcImg = new PImage[8];
     for(int i=0; i<npcImg.length; i++){
       npcImg[i] = loadImage("images/npc/npc"+i+".png");
+    }
+    for(int i=0; i<4;i++){
+      healthyNpc[i] = loadImage("images/npc/npc_healthy_"+i+".png");
     }
   }
   

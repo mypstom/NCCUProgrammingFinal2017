@@ -19,10 +19,19 @@ class Npc{
   }
   
   void display(){
-      image(img, x, y);
-      if(isCollide()!=-1){
-        image(spaceKey, x, y-spaceKey.height*1.3);  
+    if(id<4){
+      if(healthyState[id]){
+        //is healthy
+        image(healthyNpc[id], x, y);
+      }else{
+        image(img, x, y);
       }
+    }else{
+      image(img, x, y);
+    }
+    if(isCollide()!=-1){
+      image(spaceKey, x, y-spaceKey.height*1.3);  
+    }
   }
   
   int isCollide(){

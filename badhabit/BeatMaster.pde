@@ -12,7 +12,7 @@ int gamePoint =0;
 int delayCounter = 0;
 
 //int[] BPM = 105;
-float[] BPM = {52.5, 52.5, 52.5, 52.5};
+float[] BPM = {105, 52.5, 52.5, 52.5};
 int bpmCounter = 0;
 int tempoFrames;
 
@@ -20,6 +20,8 @@ boolean[] gameOppoState = {false, true, false, true};
 int[] gameSpaceItemState = {3, 1, 3, 3};
 
 int combo;
+
+boolean isGameWin = false;
 
 class BeatMaster{
   ArrayList <AttackItem> attackItems;
@@ -59,7 +61,7 @@ class BeatMaster{
     if(!song[diaNpc].isPlaying ()|| delayCounter<130){
       delayCounter++;
       if(delayCounter>180){
-        song[diaNpc].loop();
+        song[diaNpc].loop(0);
       }
     }else{
       if(bpmCounter == tempoFrames){
@@ -74,6 +76,11 @@ class BeatMaster{
       if(attackItems.get(i).isTooFar()){
         ironyMon.giveMeAMonster();
         ironyMon.showDamage();
+        
+        if(gamePoint>0){
+          gamePoint--;
+        }
+        
         combo=0;
         attackItems.remove(i);
       }else if(attackItems.get(i).isCollidePad()){
@@ -81,7 +88,7 @@ class BeatMaster{
         eRadius = 250;
         combo++;
         isHealthyFace =true;
-        gamePoint++;
+        gamePoint+=2;
         attackItems.remove(i);
       }
     }
@@ -93,16 +100,23 @@ class BeatMaster{
     if(combo>0){
       textSize(120);
       fill(245, 199, 247);  
-      text("Combo: "+ combo, 0, 0);
-      println(combo);
+      text("Combo:", 0, 0);
     }
     timeFrame--;
     
+    //time's up
     if(timeFrame<=0){
       song[diaNpc].pause();
       timeFrame = MAX_TIME*60;
+      if(gamePoint>=52){
+        isGameWin=true;
+        healthyState[diaNpc] = true;
+        money+=10;
+      }else{
+        isGameWin=false;
+      }
       gamePoint =0;
-      gameState = GAME_MAP;
+      gameState = GAME_RESULT;
     }
     
     healthFrame++;
@@ -116,7 +130,7 @@ class BeatMaster{
     strokeWeight(25);
     line(642.5, height-45, 642.5, height-45-min(560,gamePoint*10));
     
-        
+    println(gamePoint);
   }
   
   
@@ -132,7 +146,7 @@ class BeatMaster{
     stroke(#FFD480);
     strokeWeight(4);
     ellipse(310, 300, eRadius, eRadius);
-    eRadius *= 0.85;
+    eRadius *= 0.90;
   }
   
   
