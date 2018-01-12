@@ -32,6 +32,10 @@ int[][] npcPos = {
 PImage[][] npcDesc;
 int[] npcDescCount = {4, 6, 4, 6};
 
+PImage[][] ironyMonster;
+PImage[][] ironyMonsterDia;
+PImage damageImg;
+
 PImage playingBg;
 
 PImage startBg;
@@ -67,15 +71,18 @@ class AssetLoader{
   
   void gameMainAsset(){
     playingBg = loadImage("images/game/ingame/bg.png");
-    
+    damageImg = loadImage("images/game/ingame/damage.png");
     pressPadInit = new PImage[4];
     pressPadPress = new PImage[4];
     atkItems = new PImage[4];
     atkItemsOpposite = new PImage[4];
     atkItemsSpace = new PImage[4][3];
+    ironyMonster = new PImage[4][4];
+    ironyMonsterDia = new PImage[4][4];
     
     npcFace = new PImage[4];
     npcFaceHappy = new PImage[4];
+    
     for(int i=0; i<4;i++){
       pressPadInit[i] = loadImage("images/game/ingame/pressPad_init_"+i+".png");
       pressPadPress[i] = loadImage("images/game/ingame/pressPad_press_"+i+".png");
@@ -85,6 +92,10 @@ class AssetLoader{
       npcFaceHappy[i] = loadImage("images/game/ingame/gameFace"+(i+1)+"_smile.png");
       for(int j=0; j< gameSpaceItemState[i];j++){
         atkItemsSpace[i][j] = loadImage("images/game/ingame/space"+i+"_"+j+".png");
+      }
+      for(int j=0; j< 4;j++){
+        ironyMonster[i][j] = loadImage("images/game/ingame/irony"+i+"_"+j+".png");
+        ironyMonsterDia[i][j] = loadImage("images/game/ingame/irony"+i+"_"+j+"_s.png");
       }
     }
   }

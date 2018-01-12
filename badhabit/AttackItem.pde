@@ -13,7 +13,7 @@ class AttackItem{
     this.space=space;
     this.side=side;
     if(side==0){
-      this.x = 280;
+      this.x = 285;
       this.y=0;
       
     }else if(side==1){
@@ -21,7 +21,7 @@ class AttackItem{
       this.y=274;
       
     }else if(side==2){
-      this.x = 280;
+      this.x = 285;
       this.y=600;
       
     }else if(side==3){
@@ -86,7 +86,7 @@ class AttackItem{
   }
   
   
-  boolean isTooFar(){
+  boolean isTooFar(){//when user miss
     if(side==0){
       y+=speed;
       if(y>height/2){

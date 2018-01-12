@@ -24,6 +24,7 @@ int dogTimes=0;
 //in game
 int currentDescIndex=0;
 PressPad pressPad;
+IronyMonster ironyMon;
 
 Minim minim;
 AudioPlayer[] song;
@@ -74,7 +75,7 @@ void setup(){
   kitAction = new KitAction();
   
   pressPad = new PressPad();
-  
+  ironyMon = new IronyMonster();
   
   song = new AudioPlayer[4];
   
@@ -138,7 +139,7 @@ void draw(){
       pressPad.display();
       beatMaster.display();
       pressPad.displayFace();
-      
+      ironyMon.display();
       
       
       

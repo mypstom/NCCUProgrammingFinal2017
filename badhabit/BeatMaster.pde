@@ -19,6 +19,8 @@ int tempoFrames;
 boolean[] gameOppoState = {false, true, false, true};
 int[] gameSpaceItemState = {3, 1, 3, 3};
 
+int combo;
+
 class BeatMaster{
   ArrayList <AttackItem> attackItems;
   int coldDown=60;
@@ -33,8 +35,9 @@ class BeatMaster{
   }
   
   void start(){
+    combo=0;
     tempoFrames = floor(60*60/BPM[diaNpc]);
-    println(diaNpc);
+    println("Tempo: "+diaNpc);
   }
   
   void doAttack(){
@@ -69,11 +72,14 @@ class BeatMaster{
     for(int i=0; i< attackItems.size(); i++){
       attackItems.get(i).display();
       if(attackItems.get(i).isTooFar()){
+        ironyMon.giveMeAMonster();
+        ironyMon.showDamage();
+        combo=0;
         attackItems.remove(i);
       }else if(attackItems.get(i).isCollidePad()){
         //hit item
         eRadius = 250;
-        
+        combo++;
         isHealthyFace =true;
         gamePoint++;
         attackItems.remove(i);
@@ -84,6 +90,12 @@ class BeatMaster{
     fill(#f5c7f7);
     textSize(50);
     text(nf(floor(timeFrame/60), 2), 698, 85);
+    if(combo>0){
+      textSize(120);
+      fill(245, 199, 247);  
+      text("Combo: "+ combo, 0, 0);
+      println(combo);
+    }
     timeFrame--;
     
     if(timeFrame<=0){
