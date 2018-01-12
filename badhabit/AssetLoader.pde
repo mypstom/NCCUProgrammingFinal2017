@@ -1,7 +1,6 @@
 import processing.video.*;
-Movie startVideo;
 
-PImage map, colliderMap, pKey, spaceKey;
+PImage map, mapFinish, colliderMap, pKey, spaceKey;
 PImage nameBg1, nameBg2;
 PImage[] nameWords;
 PImage[] nameWordsDark;
@@ -42,6 +41,14 @@ PImage[] resultLose;
 PImage playingBg;
 
 PImage startBg;
+Movie startVideo;
+boolean isStartVideoStop = false;
+
+PImage endBg;
+Movie endVideo;
+boolean isEndVideoStop = false;
+
+
 
 class AssetLoader{
   
@@ -57,10 +64,15 @@ class AssetLoader{
     gameDescAsset();
     gameMainAsset();
     gameResult();
+    endAsset();
   }
   
   void startAsset(){
     startBg = loadImage("images/startGame/start.png");
+  }
+  
+  void endAsset(){
+    endBg = loadImage("images/end/end.png");
   }
   
   void gameDescAsset(){
@@ -127,6 +139,7 @@ class AssetLoader{
   
   void mapAsset(){
     map = loadImage("images/map/map_bg.png");
+    mapFinish = loadImage("images/map/map_bg_light.png");
     colliderMap = loadImage("images/map/colliderMap.png");
     pKey = loadImage("images/map/map_p.png");
     spaceKey = loadImage("images/map/map_space.png");

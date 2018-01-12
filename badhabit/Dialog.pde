@@ -7,7 +7,19 @@ class Dialog{
     if(diaNpc==5){
       currentDialog = dogTimes;
     }
-    image(dialogs[diaNpc][currentDialog], 0, 0);
+    
+    boolean _gameState = true;
+    for(boolean _temp: healthyState){
+      if(_temp==false){
+        _gameState=false;
+      }
+    }
+    if(_gameState&&diaNpc==4){//game is finish
+      endVideo.play();
+      gameState=GAME_END;
+    }else{
+      image(dialogs[diaNpc][currentDialog], 0, 0);
+    }
   }
   
   void keyPress(int _keyCode, int _key){

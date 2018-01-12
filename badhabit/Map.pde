@@ -7,7 +7,11 @@ class Map{
     background(255);
     pushMatrix();
     translate(max(-800, min(0, -posX)), max(-600, min(0, -posY)));
-    image(map, 0 ,0);
+    if(!isEndVideoStop){//is game finished
+      image(map, 0 ,0);
+    }else{
+      image(mapFinish, 0 ,0);
+    }
     
     for(int i=0; i < npc.length; i++){
       npc[i].update();
