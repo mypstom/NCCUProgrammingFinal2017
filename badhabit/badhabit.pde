@@ -203,6 +203,7 @@ void draw(){
           isEndVideoStop = true;
         }else{
           image(endBg, 0, 0);
+          util.showName(5);
         }
       }
       break;

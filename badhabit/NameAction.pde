@@ -30,10 +30,12 @@ class NameAction{
       }
       currentNameCount=0;
     }else if(_keyCode==ENTER || _keyCode==RETURN){
-      if(nameSceneState==1){
-        gameState = GAME_MAP;
+      if(currentNameCount>0){
+        if(nameSceneState==1 ){
+          gameState = GAME_MAP;
+        }
+        nameSceneState = nameSceneState+1;
       }
-      nameSceneState = nameSceneState+1;
     }
   }
   

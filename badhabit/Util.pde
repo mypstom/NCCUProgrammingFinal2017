@@ -30,6 +30,20 @@ class Util{
         }
       }
     }
+    else if(where==4){//old man
+      for(int i=0;i<name.length;i++){
+        if(name[i]!=' '){
+          image(nameWordsDark[findWords(name[i])], 160+i*30, 88);
+        }
+      }
+    }
+    else if(where==5){//reword
+      for(int i=0;i<name.length;i++){
+        if(name[i]!=' '){
+          image(nameWordsDark[findWords(name[i])], 310+i*30, height/2-50);
+        }
+      }
+    }
   }  
 
 }

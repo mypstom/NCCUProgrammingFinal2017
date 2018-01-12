@@ -20,6 +20,9 @@ class Dialog{
     }else{
       image(dialogs[diaNpc][currentDialog], 0, 0);
     }
+    if(diaNpc==4&&currentDialog==0){
+      util.showName(4);
+    }
   }
   
   void keyPress(int _keyCode, int _key){
