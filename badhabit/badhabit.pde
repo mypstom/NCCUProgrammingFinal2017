@@ -9,7 +9,8 @@ final int PHAR_INIT=0, PHAR_BUY=1, PHAR_PAY=2;
 int pharmacyState =PHAR_INIT;
 boolean isPharInfo =false;
 int money = 100;
-int zWater=0, xWater=0, cWater=0, vWater=0;
+//int zWater=0, xWater=0, cWater=0, vWater=0;
+int zWater=1, xWater=1, cWater=1, vWater=1;
 //for shopping
 int _money=0;
 int _zWater=0, _xWater=0, _cWater=0, _vWater=0;
@@ -60,6 +61,8 @@ NameAction nameAction;
 Dialog dialogAction;
 KitAction kitAction;
 BeatMaster beatMaster;
+
+LittleGame littleGame; 
 
 //how many people do you help
 boolean[] healthyState = {false, false, false, false};
@@ -114,6 +117,8 @@ void setup(){
   startVideo = new Movie(this, "startMG.MP4");
   endVideo = new Movie(this, "endMG.MP4");
   startVideo.play();
+  littleGame = new LittleGame(); 
+  
   
 }
 
@@ -176,10 +181,10 @@ void draw(){
       textSize(35);
       float startY = 310;
       float startX = 710;
-      text(zWater, startX, startY);
-      text(xWater, startX, startY+20+50);
-      text(cWater, startX, startY+40+100);
-      text(vWater, startX, startY+60+150);
+      text("z: "+zWater, startX-55, startY);
+      text("x: "+xWater, startX-55, startY+20+50);
+      text("c: "+cWater, startX-55, startY+40+100);
+      text("v: "+vWater, startX-55, startY+60+150);
       
       
       break;
@@ -209,6 +214,7 @@ void draw(){
       break;
     case GAME_LITTLE:
       soundSwitcher.switchSound(GAME_LITTLE);
+      littleGame.display();
       break;
   }
 

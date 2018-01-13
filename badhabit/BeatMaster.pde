@@ -12,12 +12,13 @@ int gamePoint =0;
 int delayCounter = 0;
 
 //int[] BPM = 105;
-float[] BPM = {105, 52.5, 52.5, 52.5};
+float[] BPM = {52.5, 105, 105, 140};
 int bpmCounter = 0;
 int tempoFrames;
 
 boolean[] gameOppoState = {false, true, false, true};
 int[] gameSpaceItemState = {3, 1, 3, 3};
+int[] gameEarnMoney = {10, 15, 20, 25};
 
 int combo;
 
@@ -45,7 +46,7 @@ class BeatMaster{
   void doAttack(){
     int ranSide = floor(random(0,4));
     int ranType;
-    if(gameOppoState[diaNpc]){
+    if(gameOppoState[diaNpc]&&!isZWaterEffect){
       ranType = floor(random(0, 3));
     }else{
       ranType = floor(random(0, 2));
@@ -85,7 +86,7 @@ class BeatMaster{
         attackItems.remove(i);
       }else if(attackItems.get(i).isCollidePad()){
         //hit item
-        eRadius = 250;
+        eRadius = min(280, 50+combo*10);
         combo++;
         isHealthyFace =true;
         gamePoint+=2;
@@ -97,11 +98,6 @@ class BeatMaster{
     fill(#f5c7f7);
     textSize(50);
     text(nf(floor(timeFrame/60), 2), 698, 85);
-    if(combo>0){
-      textSize(120);
-      fill(245, 199, 247);  
-      text("Combo:", 0, 0);
-    }
     timeFrame--;
     
     //time's up
@@ -109,10 +105,13 @@ class BeatMaster{
       song[diaNpc].pause();
       timeFrame = MAX_TIME*60;
       if(gamePoint>=52){
+        soundSwitcher.gameResult(0);
         isGameWin=true;
         healthyState[diaNpc] = true;
-        money+=10;
+        pressPad.initAllEffect();
+        money+=gameEarnMoney[diaNpc];
       }else{
+        soundSwitcher.gameResult(1);
         isGameWin=false;
       }
       gamePoint =0;
@@ -146,7 +145,7 @@ class BeatMaster{
     stroke(#FFD480);
     strokeWeight(4);
     ellipse(310, 300, eRadius, eRadius);
-    eRadius *= 0.90;
+    eRadius *= 0.95;
   }
   
   

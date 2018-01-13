@@ -5,6 +5,15 @@ class SoundSwitcher{
   
   }
   
+  void gameResult(int result){
+    if(result==0){
+      sound_win.play();
+    }else{
+      sound_lose.play();
+    }
+  
+  }
+  
   void click(){
     sound_click.play(0);
   }

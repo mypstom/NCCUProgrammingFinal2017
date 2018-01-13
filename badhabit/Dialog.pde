@@ -40,6 +40,7 @@ class Dialog{
       //is dog
       if(dogTimes<2){
         dogTimes++;
+        gameState=GAME_LITTLE;
       }
     }else{
       if(_key==' '){

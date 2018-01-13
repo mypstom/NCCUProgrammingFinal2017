@@ -32,7 +32,16 @@ class AttackItem{
     if(type==2){
       atkImg = atkItemsOpposite[side];
     }else if(type==0){
-      atkImg = atkItems[side];
+      if(diaNpc!=3){
+        atkImg = atkItems[diaNpc][side];
+      }else{
+        int r = floor(random(0,2));
+        if(r==0){
+          atkImg = atkItems[0][side];
+        }else{
+          atkImg = atkItems[1][side];
+        }
+      }
     }else if(type==1){
       atkImg = atkItemsSpace[diaNpc][space];
     }
@@ -55,9 +64,18 @@ class AttackItem{
     //AABB maxX1 > minX2 && maxX2 > minX1 && maxY1 > minY2 && maxY2 > minY1
     for(int i=0; i<4; i++){
       if(side==i){
+        
+        if(isVWaterEffect){
+          if(padPressState[0]||padPressState[1]||padPressState[2]||padPressState[3]||padPressSpaceState){
+            if(this.x+this.atkImg.width > padPos[i][0] && padPos[i][0]+pressPadInit[i].width > this.x
+            && this.y+this.atkImg.height > padPos[i][1] && padPos[i][1]+pressPadInit[i].height > this.y){
+              return true;
+            }
+          }
+        }
+        
         if(type==0){
           if(padPressState[i]){
-            //if is opposite type, it must trigger the another side btn, and verify current side collides
             if(this.x+this.atkImg.width > padPos[i][0] && padPos[i][0]+pressPadInit[i].width > this.x
             && this.y+this.atkImg.height > padPos[i][1] && padPos[i][1]+pressPadInit[i].height > this.y){
               return true;
@@ -73,7 +91,6 @@ class AttackItem{
           }
         }else if(type==1){
           if(padPressSpaceState){
-            //if is opposite type, it must trigger the another side btn, and verify current side collides
             if(this.x+this.atkImg.width > padPos[i][0] && padPos[i][0]+pressPadInit[i].width > this.x
             && this.y+this.atkImg.height > padPos[i][1] && padPos[i][1]+pressPadInit[i].height > this.y){
               return true;
@@ -84,8 +101,7 @@ class AttackItem{
     }
     return false;
   }
-  
-  
+
   boolean isTooFar(){//when user miss
     if(side==0){
       y+=speed;
