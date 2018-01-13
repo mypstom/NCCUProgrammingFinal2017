@@ -12,7 +12,7 @@ int gamePoint =0;
 int delayCounter = 0;
 
 //int[] BPM = 105;
-float[] BPM = {52.5, 105, 105, 140};
+float[] BPM = {52.5, 60, 105, 140};
 int bpmCounter = 0;
 int tempoFrames;
 

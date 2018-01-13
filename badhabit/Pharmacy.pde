@@ -80,7 +80,8 @@ class Pharmacy{
           _money = _zWater*40+_xWater*15+_cWater*15+_vWater*30;
           break;
         case PHAR_PAY:
-          if(_key==ENTER){
+          if(_key==ENTER||_key==RETURN){
+            sound_pharmacy_pay.play();
             pharmacyState=PHAR_INIT;
             _zWater=0;
             _xWater=0;
