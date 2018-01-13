@@ -40,6 +40,8 @@ AudioPlayer sound_lose;
 AudioPlayer sound_little;
 AudioPlayer sound_pharmacy;
 AudioPlayer sound_pharmacy_pay;
+AudioPlayer sound_use_drag;
+
 
 
 
@@ -65,8 +67,8 @@ BeatMaster beatMaster;
 LittleGame littleGame; 
 
 //how many people do you help
-//boolean[] healthyState = {false, false, false, false};
-boolean[] healthyState = {true, true, true, true};
+boolean[] healthyState = {false, false, false, false};
+//boolean[] healthyState = {true, true, true, true};
 
 void setup(){
   frameRate(60);
@@ -107,6 +109,7 @@ void setup(){
   sound_little = minim.loadFile("sound/little_game.mp3", 2048);
   sound_pharmacy = minim.loadFile("sound/pharmacy.mp3", 2048);
   sound_pharmacy_pay = minim.loadFile("sound/pay_money.mp3", 2048);
+  sound_use_drag = minim.loadFile("sound/use_medicine.mp3", 2048);
   beatMaster = new BeatMaster();
   
   name = new char[MAX_NAME_COUNT];
@@ -202,6 +205,7 @@ void draw(){
       float mt2 = endVideo.time();
       if(mt2<=13&&!isEndVideoStop){
         image(endVideo, 0, 0);
+        util.showName(5);
       }else{
         if(!isEndVideoStop){
           endVideo.stop();

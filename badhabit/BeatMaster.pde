@@ -52,7 +52,6 @@ class BeatMaster{
       ranType = floor(random(0, 2));
     }
     
-    println(ranType);
     int ranSpace = floor(random(0,gameSpaceItemState[diaNpc]));
     attackItems.add( new AttackItem(ranSide, ranType, ranSpace));
 
@@ -136,11 +135,6 @@ class BeatMaster{
   void drawEffect(){
     float a = map(eRadius, 20, 80, 60, 255);
     fill(255, 212, 128, a);
-    //noFill();
-    beat.detect(song[diaNpc].mix);
-    if ( beat.isOnset() ){
-
-    }
     
     stroke(#FFD480);
     strokeWeight(4);

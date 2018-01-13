@@ -48,6 +48,7 @@ class LittleGame{
         image(littleV, 265, 170+(littleAns[currentQ]-1)*80);
       }
     }else if(littleState==1){
+      
       image(littleWin, 0, 0);
       fill(#192659);
       textSize(60);
@@ -55,6 +56,7 @@ class LittleGame{
       
       
     }else if(littleState==2){
+      
       image(littleLose, 0, 0);
       fill(#192659);
       textSize(60);
@@ -74,7 +76,11 @@ class LittleGame{
     if(userCorrectCount>3){
       littleState =1;
       money+=40;
+      sound_little.pause();
+      sound_win.play();
     }else{
+      sound_little.pause();
+      sound_lose.play();
       littleState =2;
       money+=40;
     }

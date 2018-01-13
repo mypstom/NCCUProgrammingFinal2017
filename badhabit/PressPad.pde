@@ -87,18 +87,22 @@ class PressPad{
     if(_key=='z'){
       if(zWater>0){
         zWaterEffect();
+        sound_use_drag.play();
       }
     }else if(_key=='x'){
       if(xWater>0){
         xWaterEffect();
+        sound_use_drag.play();
       }
     }else if(_key=='c'){
       if(cWater>0){
         cWaterEffect();
+        sound_use_drag.play();
       }
     }else if(_key=='v'){
       if(vWater>0){
         vWaterEffect();
+        sound_use_drag.play();
       }
     }
   }

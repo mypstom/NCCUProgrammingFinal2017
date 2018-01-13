@@ -1,3 +1,4 @@
+int nameTextSize = 1;
 class Util{
 
   int findWords(char factor){
@@ -38,11 +39,14 @@ class Util{
       }
     }
     else if(where==5){//reword
+      
       for(int i=0;i<name.length;i++){
         if(name[i]!=' '){
-          image(nameWordsDark[findWords(name[i])], 310+i*30, height/2-50);
+          PImage _tempText = nameWordsDark[findWords(name[i])];
+          image(_tempText, 310+i*30, height/2-50, _tempText.width*nameTextSize, _tempText.height*nameTextSize);
         }
       }
+      
     }
   }  
 
