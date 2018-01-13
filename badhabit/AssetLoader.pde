@@ -49,7 +49,13 @@ PImage endBg;
 Movie endVideo;
 boolean isEndVideoStop = false;
 
-
+PImage[][] littleQuestion;
+PImage[][] littleQuestionActive;
+PImage[] littleQuestionText;
+PImage[] littleQuestionAns;
+PImage littleWin;
+PImage littleLose;
+PImage littleBg;
 
 class AssetLoader{
   
@@ -66,6 +72,25 @@ class AssetLoader{
     gameMainAsset();
     gameResult();
     endAsset();
+    littleGameAsset();
+  }
+  
+  void littleGameAsset(){
+    littleQuestionText = new PImage[10];
+    littleQuestionAns = new PImage[10];
+    littleQuestion = new PImage[10][4];
+    littleQuestionActive = new PImage[10][4];
+    for(int i=0; i<10; i++){
+      for(int j=0; j<4; j++){
+        littleQuestion[i][j] = loadImage("images/little/q"+(i+1)+"_"+(j+1)+".png");
+        littleQuestionActive[i][j] = loadImage("images/little/q"+(i+1)+"_"+(j+1)+"_a.png");
+      }
+      littleQuestionText[i] = loadImage("images/little/q"+(i+1)+".png");
+      littleQuestionAns[i] = loadImage("images/little/q"+(i+1)+"_a.png");
+    }
+    littleWin = loadImage("images/little/win.png");
+    littleLose = loadImage("images/little/lose.png");
+    littleBg = loadImage("images/little/bg.png");
   }
   
   void startAsset(){

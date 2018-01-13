@@ -242,6 +242,9 @@ void keyPressed(){
     case GAME_PLAYING:
       pressPad.keyPress(keyCode, key);
       break;
+    case GAME_LITTLE:
+      littleGame.keyPress(keyCode, key);
+      break;
   }
 }
 
@@ -305,6 +308,9 @@ void keyReleased(){
         isEndVideoStop = true;
         gameState=GAME_MAP;
       }
+      break;
+    case GAME_LITTLE:
+      littleGame.keyRelease(keyCode, key);
       break;
   }
 }
