@@ -65,8 +65,8 @@ BeatMaster beatMaster;
 LittleGame littleGame; 
 
 //how many people do you help
-boolean[] healthyState = {false, false, false, false};
-//boolean[] healthyState = {true, true, true, true};
+//boolean[] healthyState = {false, false, false, false};
+boolean[] healthyState = {true, true, true, true};
 
 void setup(){
   frameRate(60);
