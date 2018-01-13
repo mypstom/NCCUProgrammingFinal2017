@@ -56,6 +56,7 @@ PImage[] littleQuestionAns;
 PImage littleWin;
 PImage littleLose;
 PImage littleBg;
+PImage littleV;
 
 class AssetLoader{
   
@@ -91,6 +92,7 @@ class AssetLoader{
     littleWin = loadImage("images/little/win.png");
     littleLose = loadImage("images/little/lose.png");
     littleBg = loadImage("images/little/bg.png");
+    littleV = loadImage("images/little/v.png");
   }
   
   void startAsset(){

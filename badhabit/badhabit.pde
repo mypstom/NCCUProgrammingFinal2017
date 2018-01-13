@@ -9,8 +9,8 @@ final int PHAR_INIT=0, PHAR_BUY=1, PHAR_PAY=2;
 int pharmacyState =PHAR_INIT;
 boolean isPharInfo =false;
 int money = 100;
-//int zWater=0, xWater=0, cWater=0, vWater=0;
-int zWater=1, xWater=1, cWater=1, vWater=1;
+int zWater=0, xWater=0, cWater=0, vWater=0;
+//int zWater=1, xWater=1, cWater=1, vWater=1;
 //for shopping
 int _money=0;
 int _zWater=0, _xWater=0, _cWater=0, _vWater=0;
